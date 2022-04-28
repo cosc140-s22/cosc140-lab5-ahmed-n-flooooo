@@ -131,3 +131,4 @@ MEDIA_URL = '/images/'
 
 LOGIN_URL = '/login/'
 
+CSRF_TRUSTED_ORIGINS=['https://cosc140-lab5-ahmed-n-flooooo.florenceluo.repl.co']
