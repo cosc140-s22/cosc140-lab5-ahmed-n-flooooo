@@ -7,9 +7,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class Product(models.Model):
     name = models.CharField(max_length=50, blank=False)
     description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=6, decimal_places=2, blank=False, validators=[MinValueValidator(0)])
+    price = models.DecimalField(max_digits=6, decimal_places=2, blank=False, validators=[MinValueValidator(0.0)])
     minimum_age_appropriate = models.IntegerField(default=0, blank=False, validators=[MinValueValidator(0)])
-    maximum_age_appropriate = models.IntegerField(default=-1, blank=False, validators=[MinValueValidator(minimum_age_appropriate)])
+    maximum_age_appropriate = models.IntegerField(default=-1, blank=False, validators=[MinValueValidator(minimum_age_appropriate), MaxValueValidator(135)])
     release_date = models.DateField()
 
     def __str__(self):
