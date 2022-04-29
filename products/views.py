@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.db.models import Prefetch
 from .models import Product
 from .forms import ProductFilterForm, ReviewForm
@@ -22,17 +22,15 @@ def show(request, product_id):
 
 @login_required
 def create_review(request, product_id):
-  p = get_object_or_404(Product, pk=product_id)
-  if request.method == 'POST':
-    form = ReviewForm(request.POST)
-    if form.is_valid():
-      p.review_set.create(stars=form.cleaned_data['stars'],
-review=form.cleaned_data['review_text'], user = request.user)
-      return redirect('show', p.id)
+    p = get_object_or_404(Product, pk=product_id)
+    if (request.method == 'POST'):
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            p.review_set.create(stars=form.cleaned_data['stars'],review=form.cleaned_data['review_text'], user=request.user)
+            return redirect('show',p.id)
+        else:
+            pass
     else:
-      pass
-  else:
-    form = ProductReviewForm()
-  form = ReviewForm(request.POST)
-  context = {'product':p, "form":form}
-  return render(request, 'products/review.html', context)
+        form = ReviewForm()
+    context = { 'product':p, "form":form}
+    return render(request, 'products/review.html', context)
