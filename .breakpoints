@@ -7,6 +7,14 @@
         "version": 60,
         "index": 27
       }
+    ],
+    "products/views.py": [
+      {
+        "id": "1077ad96-ce85-40ac-ba70-68936307fcd9",
+        "line": 11,
+        "version": 152,
+        "index": 346
+      }
     ]
   }
 }

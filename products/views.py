@@ -22,7 +22,17 @@ def show(request, product_id):
 
 @login_required
 def create_review(request, product_id):
-	p = get_object_or_404(Product, pk=product_id)
-	form = ReviewForm(request.POST)
-	context = { 'product':p, "form":form}
-	return render(request, 'products/review.html', context)
+  p = get_object_or_404(Product, pk=product_id)
+  if request.method == 'POST':
+    form = ReviewForm(request.POST)
+    if form.is_valid():
+      p.review_set.create(stars=form.cleaned_data['stars'],
+review=form.cleaned_data['review_text'], user = request.user)
+      return redirect('show', p.id)
+    else:
+      pass
+  else:
+    form = ProductReviewForm()
+  form = ReviewForm(request.POST)
+  context = {'product':p, "form":form}
+  return render(request, 'products/review.html', context)
