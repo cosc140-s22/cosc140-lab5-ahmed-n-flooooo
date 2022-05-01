@@ -26,7 +26,9 @@ def create_review(request, product_id):
     if (request.method == 'POST'):
         form = ReviewForm(request.POST)
         if form.is_valid():
-            p.review_set.create(stars=form.cleaned_data['stars'],review=form.cleaned_data['review_text'], user=request.user)
+            # p.review_set.create(stars=form.cleaned_data['stars'],review=form.cleaned_data['review_text'], user=request.user)
+            # JS: changed review_text above to review text, to match model
+            p.review_set.create(stars=form.cleaned_data['stars'],review=form.cleaned_data['review'], user=request.user)
             return redirect('show',p.id)
         else:
             pass

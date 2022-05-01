@@ -10,5 +10,7 @@
 
 ## Feedback
 
-Once you commit and submit your work to Github, I'll update this section with feedback.
+S
+
+There was one minor bug in your `views.py` -- instead of `review_text` to get the data from the form, it should have just been `review`.  Once that's fixed the review saves correctly.  Everything else looked good!
 
